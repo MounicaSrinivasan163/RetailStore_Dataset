@@ -1,0 +1,16 @@
+List of tasks:
+#1.)Identify average customer visit in Type C store in June Month.(Customer footfall per month)
+#2.)Find the highest sales in each store type on Holiday season.(This helps to provide additional offers at the store the performs better)
+#3.)What is the expected sales of each depeartment when the unemployment factor is greater than 7.(useful to find the dependency of unemployment and sales)
+#4.)Aggregate net sales for each department in month wise.
+#5.)Identify the performance of the store on weekwise, without offers.(Performance of a store per week without any offers)
+#6.) Identify the top 3 departments with the highest sales variance across all stores.(This helps understand which departments have inconsistent performance.)
+#7.) Analyze the impact of fuel prices on weekly sales for each store type.( Do customers shop less when fuel is expensive?)
+#8.) Compare average weekly sales during holidays vs non-holidays for each store type.(Understand how holiday traffic affects different store formats.)
+#9.) Determine which store has the highest revenue-to-size ratio.(This measures efficiency – small stores with high sales are highly efficient.)
+#10.) Cluster stores based on their average sales, size, and unemployment impact in the region.(Useful for customer segmentation and regional strategy.)
+#11.) Forecast future sales for the top 5 departments using time-series modeling (basic moving average).(Add a predictive flavor to your analysis.)
+#12.) Identify any correlation between markdowns (MarkDown1–5) and weekly sales.(This helps evaluate the effectiveness of promotional campaigns.)
+#13.) Analyze which departments perform better in extreme temperatures (very hot or cold weeks).(Helpful for seasonal inventory planning.)
+#14.) Find the average weekly sales for each month and identify peak shopping months.(Monthly trend analysis for planning offers or staffing.)
+#15.) Evaluate whether CPI (consumer price index) impacts consumer buying patterns across store types.(Does inflation make people shop less or shift to lower-tier stores?)
