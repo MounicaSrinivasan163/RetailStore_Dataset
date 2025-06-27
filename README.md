@@ -1,5 +1,7 @@
 # RetailStore_Dataset
 🛒 The Story of Retail Performance: A Data Journey
+
+
 Once upon a time in a nationwide retail chain, hundreds of stores operated across various regions. To understand how well these stores performed, three powerful scrolls of data were compiled. Each scroll held a different piece of the puzzle.
  **************************************
 📜 Scroll 1: stores_data_set.csv – The Store Ledger
