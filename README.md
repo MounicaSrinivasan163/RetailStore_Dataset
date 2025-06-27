@@ -1,7 +1,7 @@
 # RetailStore_Dataset
 🛒 The Story of Retail Performance: A Data Journey
 Once upon a time in a nationwide retail chain, hundreds of stores operated across various regions. To understand how well these stores performed, three powerful scrolls of data were compiled. Each scroll held a different piece of the puzzle.
-
+ **************************************
 📜 Scroll 1: stores_data_set.csv – The Store Ledger
 This scroll tells us who the characters are in this story. Each entry is a store, described by:
 
@@ -12,7 +12,7 @@ Type 🏷️ – a classification such as A, B, or C. Perhaps “Type A” store
 Size 📏 – the size of the store, possibly in square feet. A useful indicator of capacity and scale.
 
 This ledger helps us understand the identity and scale of each store in the kingdom.
-
+************************************************
 
 
 📜 Scroll 2: sales_data_set.csv – The Book of Sales
