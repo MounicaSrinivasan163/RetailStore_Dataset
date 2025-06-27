@@ -13,6 +13,8 @@ Size 📏 – the size of the store, possibly in square feet. A useful indicator
 
 This ledger helps us understand the identity and scale of each store in the kingdom.
 
+
+
 📜 Scroll 2: sales_data_set.csv – The Book of Sales
 This scroll records the daily happenings in each department across all stores:
 
@@ -27,6 +29,7 @@ Weekly_Sales 💵 – the total sales for that department and week.
 IsHoliday 🎉 – a flag to tell if the week includes a major holiday (which might influence sales!).
 
 This scroll is crucial to track performance, highlight trends, and detect whether holidays bring boosts or dips.
+
 
 📜 Scroll 3: Features_data_set.csv – The Book of Conditions
 But what affects the sales? This third scroll holds the external and promotional influences that could sway customer behavior:
@@ -44,6 +47,7 @@ CPI (Consumer Price Index) and Unemployment 📉 – economic indicators showing
 IsHoliday 🎊 – again, to flag if it's a special season.
 
 This scroll paints the environmental and economic backdrop to sales, helping us understand why people bought what they did.
+
 
 🧠 Together, they tell the full story:
 The Store Ledger (first scroll) tells us who and where.
