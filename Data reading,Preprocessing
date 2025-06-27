@@ -1,0 +1,15 @@
+**Step 1**: Read all the csv files into a pandas data frame
+import pandas as pd #importing pandas library
+st_df=pd.read_csv("/content/stores_data_set.csv")
+sa_df=pd.read_csv("/content/sales_data_set.csv")
+f_df=pd.read_csv("/content/Features_data_set.csv")
+
+*step2*: Merge the data set into a single dataframe
+st_sa_df=pd.merge(st_df,sa_df,on="Store") 
+df_final=pd.merge(st_sa_df,f_df,on=["Store","Date","IsHoliday"])
+
+**step3**:data preprocessing: 
+check the datatypes of all the columns
+df_final.info()
+//we find that the date is described as object , we need to change that into pandas readable datetime object
+df_final['Date'] = pd.to_datetime(df_final['Date'],format="%d/%m/%Y")
