@@ -7,6 +7,7 @@ f_df=pd.read_csv("/content/Features_data_set.csv")
 *step2*: Merge the data set into a single dataframe
 st_sa_df=pd.merge(st_df,sa_df,on="Store") 
 df_final=pd.merge(st_sa_df,f_df,on=["Store","Date","IsHoliday"])
+df_final # this is the final merged data frame will all the columns from the 3 files.
 
 **step3**:data preprocessing: 
 check the datatypes of all the columns
