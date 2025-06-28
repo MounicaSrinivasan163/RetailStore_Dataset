@@ -1,3 +1,5 @@
+These are the basic steps to be followed before analyzing the data:
+
 **Step 1**: Read all the csv files into a pandas data frame
 import pandas as pd #importing pandas library
 st_df=pd.read_csv("/content/stores_data_set.csv")
