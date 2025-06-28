@@ -1,0 +1,125 @@
+SOLUTIONS
+List of tasks:
+
+#1.)Identify average customer visit in Type C store in June Month.(Customer footfall per month)
+
+df_final["Customer_visit"]=df_final["Weekly_Sales"]/df_final["CPI"]
+df_final[(df_final["Type"]=="C") & (df_final["Month_no"]==6)]["Customer_visit"].mean()
+
+
+*******************************************************************************************************************************************************************************************
+#2.)Find the highest sales in each store type on Holiday season.(This helps to provide additional offers at the store the performs better)
+# Step 1: Filter holiday data
+holiday_df = df_final[df_final['IsHoliday'] == True]
+
+# Step 2: Get the index (row) where Weekly_Sales is max for each store
+idx = holiday_df.groupby('Store')['Weekly_Sales'].idxmax()
+
+# Step 3: Use those indices to retrieve the rows from the original filtered data
+max_sales_on_holiday = holiday_df.loc[idx]
+
+# Step 4: Display result
+max_sales_on_holiday[["Store","Weekly_Sales"]].head(2)
+
+or:
+
+df_max=df_final[df_final['IsHoliday'] == True].groupby('Store')['Weekly_Sales'].max()
+df_final[df_final['Weekly_Sales'].isin(df_max)].loc[:,['Store','Weekly_Sales']].head(2)
+
+*******************************************************************************************************************************************************************************************
+#3.)What is the expected sales of each depeartment when the unemployment factor is greater than 7.(useful to find the dependency of unemployment and sales)
+
+df_final["Actual_Sales"]=df_final["Weekly_Sales"]+df_final["MarkDown1"]+df_final["MarkDown2"]+df_final["MarkDown3"]+df_final["MarkDown4"]+df_final["MarkDown5"]
+df_final[df_final["Unemployment"]>7].groupby("Dept")["Actual_Sales"].sum()
+
+*******************************************************************************************************************************************************************************************
+#4.)Aggregate net sales for each department in month wise.
+# Convert 'Date' to datetime if not already
+df_final['Date'] = pd.to_datetime(df_final['Date'],format="%d/%m/%Y")
+
+# Extract month name or number   # or .dt.month for number
+df_final['Month'] = df_final['Date'].dt.month_name()
+df_final['Month_no'] = df_final['Date'].dt.month
+
+# Group by Dept and Month, then sum Weekly_Sales
+monthly_sales = df_final.groupby(['Dept', 'Month_no','Month'])['Weekly_Sales'].sum().reset_index()
+monthly_sales.iloc[:,[0,2,3]]
+
+*******************************************************************************************************************************************************************************************
+#5.)Identify the performance of the store on weekwise, without offers.(Performance of a store per week without any offers)
+
+no_offer_df = df_final[ (df_final['MarkDown1'].fillna(0) == 0) & (df_final['MarkDown2'].fillna(0) == 0) & (df_final['MarkDown3'].fillna(0) == 0) & (df_final['MarkDown4'].fillna(0) == 0) &
+    (df_final['MarkDown5'].fillna(0) == 0)]
+pd.pivot_table(no_offer_df,index='Store',columns=no_offer_df["Date"].dt.isocalendar().week,values='Weekly_Sales',aggfunc='sum')
+
+
+*******************************************************************************************************************************************************************************************
+#6.) Identify the top 3 departments with the highest sales variance across all stores.(This helps understand which departments have inconsistent performance.)
+ 
+   pd.pivot_table(df_final,index="Dept",values="Weekly_Sales",aggfunc="var").sort_values(by="Weekly_Sales",ascending=False).head(3)
+
+
+*******************************************************************************************************************************************************************************************
+#7.) Analyze the impact of fuel prices on weekly sales for each store type.( Do customers shop less when fuel is expensive?)
+# Step 1: Create fuel price bins
+df_final['Fuel_Price_Range'] = pd.cut(df_final['Fuel_Price'], bins=[0,3.0, 4.0, df_final['Fuel_Price'].max()],
+                                      labels=["Low", "Medium", "High"])
+
+# Step 2: Create pivot table with binned fuel prices
+pivot = pd.pivot_table(df_final, index="Type", columns="Fuel_Price_Range", values="Weekly_Sales", aggfunc="mean")
+print(pivot)
+
+#step 3: plot this as a line graph for trend analysis for all 3 stores across fuel prices
+import matplotlib.pyplot as plt
+pivot.T.plot(kind='line', marker='o', figsize=(10,6))
+plt.title("Weekly Sales Trend vs Fuel Price Range for Each Store Type")
+plt.xlabel("Fuel Price Range")
+plt.ylabel("Average Weekly Sales")
+plt.legend(title="Store Type")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+*******************************************************************************************************************************************************************************************
+#8.) Compare average weekly sales during holidays vs non-holidays for each store type.(Understand how holiday traffic affects different store formats.)
+
+pd.pivot_table(df_final,index=["Type"],columns="IsHoliday",values="Weekly_Sales",aggfunc="mean")
+
+
+*******************************************************************************************************************************************************************************************
+#9.) Determine which store has the highest revenue-to-size ratio.(This measures efficiency – small stores with high sales are highly efficient.)
+
+# 1. Create a new column: Revenue per unit size
+df_final["Revenue_to_size"] = df_final["Weekly_Sales"] / df_final["Size"]
+
+# 2. Find the store where this ratio is maximum
+df_final[df_final["Revenue_to_size"] == df_final["Revenue_to_size"].max()]["Store"]
+
+
+
+MACHINE LEARNING:
+
+*******************************************************************************************************************************************************************************************
+#10.) Cluster stores based on their average sales, size, and unemployment impact in the region.(Useful for customer segmentation and regional strategy.)
+     store_grouped = df_final.groupby("Store")[["Weekly_Sales", "Size", "Unemployment"]].mean()
+     store_grouped
+
+*******************************************************************************************************************************************************************************************
+#11.) Forecast future sales for the top 5 departments using time-series modeling (basic moving average).(Add a predictive flavor to your analysis.)
+
+*******************************************************************************************************************************************************************************************
+#12.) Identify any correlation between markdowns (MarkDown1–5) and weekly sales.(This helps evaluate the effectiveness of promotional campaigns.)
+
+*******************************************************************************************************************************************************************************************
+#13.) Analyze which departments perform better in extreme temperatures (very hot or cold weeks).(Helpful for seasonal inventory planning.)
+
+*******************************************************************************************************************************************************************************************
+#14.) Find the average weekly sales for each month and identify peak shopping months.(Monthly trend analysis for planning offers or staffing.)
+
+*******************************************************************************************************************************************************************************************
+#15.) Evaluate whether CPI (consumer price index) impacts consumer buying patterns across store types.(Does inflation make people shop less or shift to lower-tier stores?)
+
+
+
+
+*******************************************************************************************************************************************************************************************
